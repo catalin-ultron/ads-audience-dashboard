@@ -1,0 +1,210 @@
+/*
+  Claude Dark Theme
+  Palette: Deep espresso, burnt orange, warm parchment
+  Use case: Dark-mode dashboards, sequence viewers, sales collateral
+  Author: Generated for NXT Enterprises / Ultron
+*/
+
+:root {
+  /* Backgrounds */
+  --bg-base: #140A05;
+  --bg-surface: #1A0F08;
+  --bg-surface-elevated: #25160E;
+  --bg-card: #12080A;
+  --bg-card-active: #1A0C08;
+
+  /* Accents */
+  --accent-primary: #D6702A;
+  --accent-primary-hover: #E0803A;
+  --accent-secondary: #8B4513;
+  --accent-dim: #A0522D;
+  --accent-glow: rgba(214, 112, 42, 0.15);
+
+  /* Text */
+  --text-primary: #E8DCC4;
+  --text-secondary: #C4B8A0;
+  --text-muted: #8A7D6B;
+  --text-inverse: #3D1F0D;
+
+  /* Borders & Dividers */
+  --border-subtle: rgba(61, 31, 13, 0.5);
+  --border-default: #3D1F0D;
+  --border-accent: rgba(214, 112, 42, 0.3);
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 20px rgba(214, 112, 42, 0.1);
+
+  /* Gradients */
+  --gradient-accent: linear-gradient(135deg, #D6702A 0%, #8B4513 100%);
+  --gradient-surface: linear-gradient(180deg, #1A0F08 0%, #140A05 100%);
+  --gradient-timeline: linear-gradient(180deg, #D6702A 0%, #8B4513 100%);
+
+  /* Spacing Scale */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+
+  /* Typography */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --font-mono: "SF Mono", Monaco, "Cascadia Code", monospace;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 2rem;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 350ms ease;
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+}
+
+/* Reset & Base */
+.claude-dark {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+}
+
+.claude-dark * {
+  box-sizing: border-box;
+}
+
+/* Typography */
+.claude-dark h1,
+.claude-dark h2,
+.claude-dark h3 {
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.claude-dark p {
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Buttons */
+.claude-dark .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--accent-primary);
+  background: var(--gradient-accent);
+  color: white;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.claude-dark .btn:hover {
+  filter: brightness(1.15);
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-1px);
+}
+
+.claude-dark .btn-secondary {
+  background: transparent;
+  color: var(--accent-primary);
+}
+
+.claude-dark .btn-secondary:hover {
+  background: var(--accent-glow);
+}
+
+/* Cards */
+.claude-dark .card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  transition: all var(--transition-base);
+}
+
+.claude-dark .card:hover {
+  border-color: var(--border-accent);
+  box-shadow: var(--shadow-glow);
+}
+
+.claude-dark .card-active {
+  background: var(--bg-card-active);
+  border-color: var(--accent-primary);
+}
+
+/* Timeline */
+.claude-dark .timeline-line {
+  background: var(--gradient-timeline);
+  width: 2px;
+}
+
+.claude-dark .timeline-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  box-shadow: 0 0 0 4px var(--bg-base), 0 0 0 6px var(--accent-secondary);
+}
+
+/* Tags & Badges */
+.claude-dark .badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: rgba(214, 112, 42, 0.12);
+  color: var(--accent-primary);
+  border: 1px solid rgba(214, 112, 42, 0.2);
+}
+
+/* Dividers */
+.claude-dark .divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--border-default) 50%, transparent 100%);
+  margin: var(--space-lg) 0;
+}
+
+/* Scrollbar */
+.claude-dark * {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-default) var(--bg-surface);
+}
+
+.claude-dark *::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.claude-dark *::-webkit-scrollbar-track {
+  background: var(--bg-surface);
+}
+
+.claude-dark *::-webkit-scrollbar-thumb {
+  background: var(--border-default);
+  border-radius: 4px;
+}
+
+.claude-dark *::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-secondary);
+}
