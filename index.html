@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Striker — Paul Copplestone Follow-Up Sequence</title>
+<style>
+  :root {
+    --bg: #0B0C10;
+    --surface: #1F2833;
+    --surface-light: #2A3644;
+    --text: #C5C6C7;
+    --text-heading: #66FCF1;
+    --accent: #45A29E;
+    --accent-dim: #2F7A78;
+    --border: #3A4A5A;
+    --delay-badge: #FFC857;
+    --delay-text: #1F2833;
+    --cta-bg: #66FCF1;
+    --cta-text: #0B0C10;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  header h1 {
+    color: var(--text-heading);
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  header p {
+    color: var(--accent);
+    font-size: 0.9rem;
+  }
+
+  .stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    text-align: center;
+    min-width: 120px;
+  }
+
+  .stat-value {
+    color: var(--text-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 0.25rem;
+  }
+
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0.65rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent), var(--accent-dim));
+  }
+
+  .step {
+    position: relative;
+    margin-bottom: 2rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .step:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  }
+
+  .step::before {
+    content: '';
+    position: absolute;
+    left: -1.9rem;
+    top: 1.5rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 3px solid var(--bg);
+    z-index: 1;
+  }
+
+  .step-header {
+    background: var(--surface-light);
+    padding: 1rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .step-number {
+    background: var(--accent);
+    color: var(--cta-text);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+
+  .step-title {
+    flex: 1;
+    margin-left: 0.75rem;
+    font-weight: 600;
+    color: var(--text-heading);
+  }
+
+  .step-toggle {
+    color: var(--accent);
+    font-size: 1.25rem;
+    transition: transform 0.2s;
+  }
+
+  .step.expanded .step-toggle {
+    transform: rotate(180deg);
+  }
+
+  .step-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .step.expanded .step-body {
+    max-height: 1200px;
+  }
+
+  .step-content {
+    padding: 1.25rem;
+  }
+
+  .delay-badge {
+    display: inline-block;
+    background: var(--delay-badge);
+    color: var(--delay-text);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.35rem 0.75rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+  }
+
+  .field {
+    margin-bottom: 1.25rem;
+  }
+
+  .field-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-bottom: 0.35rem;
+    font-weight: 600;
+  }
+
+  .field-value {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    font-family: 'SF Mono', Monaco, monospace;
+    font-size: 0.85rem;
+    color: var(--text);
+    line-height: 1.5;
+    white-space: pre-wrap;
+  }
+
+  .field-value.subject {
+    color: var(--text-heading);
+    font-weight: 500;
+  }
+
+  .notes {
+    background: rgba(69, 162, 158, 0.08);
+    border-left: 3px solid var(--accent);
+    padding: 1rem;
+    border-radius: 0 6px 6px 0;
+    margin-top: 1rem;
+  }
+
+  .notes-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .notes p {
+    font-size: 0.85rem;
+    line-height: 1.55;
+  }
+
+  .insights {
+    margin-top: 3rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .insights h2 {
+    color: var(--text-heading);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+
+  .insights ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .insights li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .insights li:last-child { border-bottom: none; }
+
+  .insights li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .cta-bar {
+    margin-top: 2rem;
+    text-align: center;
+  }
+
+  .btn {
+    display: inline-block;
+    background: var(--cta-bg);
+    color: var(--cta-text);
+    font-weight: 700;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: none;
+    cursor: pointer;
+    margin: 0 0.5rem;
+    transition: opacity 0.2s;
+  }
+
+  .btn:hover { opacity: 0.9; }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+  }
+
+  @media (max-width: 640px) {
+    .stats-bar { gap: 1rem; }
+    .timeline { padding-left: 1.5rem; }
+    .step::before { left: -1.4rem; }
+    .step-header { flex-wrap: wrap; }
+    .step-title { width: 100%; margin: 0.5rem 0 0 0; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Paul Copplestone — Follow-Up Sequence</h1>
+    <p>Supabase · CEO & Founder · Post-Call Striker Cadence</p>
+  </header>
+
+  <div class="stats-bar">
+    <div class="stat">
+      <div class="stat-value">3</div>
+      <div class="stat-label">Emails</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">9</div>
+      <div class="stat-label">Day Span</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">2</div>
+      <div class="stat-label">CTA Options</div>
+    </div>
+  </div>
+
+  <div class="timeline">
+
+    <!-- Step 1 -->
+    <div class="step expanded" data-step="1">
+      <div class="step-header" onclick="toggleStep(1)">
+        <span class="step-number">Email 1</span>
+        <span class="step-title">Same-Day Recap</span>
+        <span class="step-toggle">▼</span>
+      </div>
+      <div class="step-body">
+        <div class="step-content">
+          <div class="delay-badge">Send +4 hours after call</div>
+
+          <div class="field">
+            <div class="field-label">Subject Line</div>
+            <div class="field-value subject">idea from our call — a 90-day content sprint blueprint</div>
+          </div>
+
+          <div class="field">
+            <div class="field-label">Body</div>
+            <div class="field-value">Hey Paul,
+
+Enjoyed the call — the latest Supabase Launch Week setup was eye-opening.
+
+If you're open to it, I can sketch out a lightweight 90-day Content Sprint Blueprint tailored to Supabase's current product roadmap and dev-community goals. No pitch, just a concrete plan for how a systems-based content engine could support your next growth phase.
+
+Worth a look?
+
+Catalin</div>
+          </div>
+
+          <div class="notes">
+            <div class="notes-label">Strategy Note</div>
+            <p>CTA: Soft ask for permission. Recaps call context immediately. Positions blueprint as free value, not a sales asset.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step" data-step="2">
+      <div class="step-header" onclick="toggleStep(2)">
+        <span class="step-number">Email 2</span>
+        <span class="step-title">Value-Add Follow-up (Case Study Angle)</span>
+        <span class="step-toggle">▼</span>
+      </div>
+      <div class="step-body">
+        <div class="step-content">
+          <div class="delay-badge">Send +3–4 days if no reply</div>
+
+          <div class="field">
+            <div class="field-label">Subject Line</div>
+            <div class="field-value subject">how Linear turned their speed into their moat (and the content gap they almost missed)</div>
+          </div>
+
+          <div class="field">
+            <div class="field-label">Body</div>
+            <div class="field-value">Hey Paul,
+
+Most devtools companies are incredible at building product but inconsistent at documenting the philosophy behind the product. Linear turned their speed into content moats by systematizing their Launch Weeks — but it took them 18 months to build that engine.
+
+Supabase is already ahead of the curve with your community velocity. The next unlock is making the content generation as repeatable as the product ships.
+
+That 90-day blueprint I mentioned? It maps exactly to how devtools brands systematize their narrative without the founder becoming the bottleneck.
+
+Still worth sending over?
+
+Catalin</div>
+          </div>
+
+          <div class="notes">
+            <div class="notes-label">Strategy Note</div>
+            <p>CTA: Re-engages with relevant case study context (Linear). Reinforces the core pain point (founder-as-bottleneck) and ties it to the original offer.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step" data-step="3">
+      <div class="step-header" onclick="toggleStep(3)">
+        <span class="step-number">Email 3</span>
+        <span class="step-title">Breakup / Next-Step Close</span>
+        <span class="step-toggle">▼</span>
+      </div>
+      <div class="step-body">
+        <div class="step-content">
+          <div class="delay-badge">Send +5 days if no reply</div>
+
+          <div class="field">
+            <div class="field-label">Subject Line</div>
+            <div class="field-value subject">update — the schematic and one last question</div>
+          </div>
+
+          <div class="field">
+            <div class="field-label">Body</div>
+            <div class="field-value">Hey Paul,
+
+I put together a simplified schematic for how a Content Sprint Blueprint would layer into Supabase's next quarter — product launches, community drops, and founder narrative.
+
+Zero obligation, but I'd rather share it and let you steal the framework than have it sit in my drafts.
+
+Two options:
+1. I send the schematic over email — no call needed.
+2. We do a quick 20-min working session and I walk you through the ops layer.
+
+Either works. Let me know before Friday and I'll fire it over.
+
+Catalin</div>
+          </div>
+
+          <div class="notes">
+            <div class="notes-label">Strategy Note</div>
+            <p>CTA: Explicit breakup with binary choice (low-friction email send vs. working session). Creates urgency and removes pressure by making email-only an acceptable outcome.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="insights">
+    <h2>Strategic Insights</h2>
+    <ul>
+      <li>The sequence moves from curiosity-driven opener → credibility-building midpoint → urgency-based close without ever feeling pushy.</li>
+      <li>Every CTA offers an escape hatch: Paul can engage with zero commitment, request content without a call, or opt into a short working session.</li>
+      <li>The Linear case study is deliberately chosen: it signals "I understand devtools" and creates subtle competitive FOMO without naming a direct Supabase rival.</li>
+    </ul>
+
+    <h2 style="margin-top:1.5rem">Recommendations</h2>
+    <ul>
+      <li>Consider A/B testing Email 2 subject line with alternative: "the content bottleneck every fast-shipping devtool hits" — same insight, more direct pain naming.</li>
+      <li>If Paul replies to Email 1 with interest, skip Email 2 and move straight to sending the blueprint with a "next-step" prompt attached.</li>
+      <li>Track Email 3 open rates closely — breakup emails often see the highest engagement because the psychological pressure to respond drops.</li>
+    </ul>
+  </div>
+
+  <div class="cta-bar">
+    <button class="btn" onclick="expandAll()">Expand All</button>
+    <button class="btn btn-secondary" onclick="collapseAll()">Collapse All</button>
+  </div>
+</div>
+
+<script>
+  function toggleStep(n) {
+    document.querySelector('.step[data-step="'+n+'"]').classList.toggle('expanded');
+  }
+  function expandAll() {
+    document.querySelectorAll('.step').forEach(s => s.classList.add('expanded'));
+  }
+  function collapseAll() {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('expanded'));
+  }
+</script>
+</body>
+</html>
